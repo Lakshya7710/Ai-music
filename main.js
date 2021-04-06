@@ -7,7 +7,6 @@ right_wristX=0;
 right_wristY=0;
 leftWrist_score=0;
 rightWrist_score=0;
-song_name="";
 
 
 function setup(){
@@ -36,12 +35,23 @@ function draw(){
     fill("red");
     stroke("red");
     best_song_ever_status=song1.isPlaying();
+    steal_my_girl_status=song2.isPlaying();
+
     if (leftWrist_score>0.2){
         circle(left_wristX,left_wristY,30)
         song2.stop();
         if(best_song_ever_status==false){
             song1.play()
             document.getElementById("song_name").innerHTML="Playing : Best Song Ever"
+        }
+    }
+
+    if(rightWrist_score>0.2){
+        circle(right_wristX,right_wristY,30);
+        song1.stop();
+        if(steal_my_girl_status==false){
+            song2.play();
+            document.getElementById("song_name").innerHTML="Playing : Steal My Girl"
         }
     }
 }
@@ -60,4 +70,9 @@ function gotPoses(results){
         console.log("left wrist x =" + left_wristX + " left wrist y =" + left_wristY);
         console.log("right wrist x =" + right_wristX + " right wrist y =" + right_wristY);
     }
+}
+
+function stop_song(){
+    song1.pause();
+    song2.pause();
 }
